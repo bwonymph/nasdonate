@@ -128,8 +128,14 @@
 		      <p>United Technologies for Kids is a non-profit organization dedicated to encouraging STEM education in high schools globally. </p>
 		      <p>UTK hopes to inspire younger generations all across the world by teaching the simplicities of working with modern-age technology and demonstrating how any individual's ideas could be brought to reality. At the end of the program, students will have developed the self confidence and motivation to manifest their ideas into products and tools that could have an impact in the world.</p>
 
+			  <div style="display: inline-block">
+		        <div>Donation Amount:</div>
 
-		    </div>
+		        <input type="text" id="value" placeholder="1 NAS"/>
+		        <input type="text" id="to" value="UTK Address"/>
+		      </div>
+		      <button type="button" onClick="onPayClick();">Donate</button>
+		  	</div>
 		  </div>
 		</div>
 		<div id="modalTwo" class="modal">
@@ -300,29 +306,6 @@
 	                onrefreshClick();   //search transaction result from server (result upload to server by app)
 	            }, 1000);
 	        }
-	        function onNrc20PayClick() {
-	            var to = document.getElementById("nrc20to").value;
-	            var value = document.getElementById("nrc20value").value;
-	            serialNumber = nebPay.nrc20pay("NRC", to, value, {
-	                qrcode: {
-	                    showQRCode: true
-	                },
-	                goods: {
-	                    name: "test",
-	                    desc: "test goods"
-	                },
-	                nrc20: {
-	                    contractAddress: "",
-	                    name: "demoToken",
-	                    symbol: "NRC",
-	                    decimals: 18
-	                },
-	                callback:callbackUrl,
-	            });
-	            setTimeout(() => {
-	                onrefreshClick();
-	            }, 1000);
-	        }
 	        function onDeployClick() {
 	            var sourceType = document.getElementById("sourceType").value;
 	            var source = document.getElementById("source").value;
@@ -351,32 +334,14 @@
 	                    desc: "test goods"
 	                },
 	                callback:callbackUrl,
-	                listener: listener  //set listener for extension transaction result
+	                listener: listener  
 	            });
 	            setTimeout(() => {
 	                onrefreshClick();
 	            }, 1000);
 	        }
-	        function onSimulateCallClick() {
-	            var to = document.getElementById("simulateCallTo").value;
-	            var value = document.getElementById("simulateCallValue").value;
-	            var callFunction = document.getElementById("simulateCallFunction").value;
-	            var callArgs = document.getElementById("simulateCallArgs").value;
-	            nebPay.simulateCall(to, value, callFunction, callArgs, {
-	                qrcode: {
-	                    showQRCode: true
-	                },
-	                goods: {
-	                    name: "test",
-	                    desc: "test goods"
-	                },
-	                //callback:callbackUrl, //don't need to set callback for simulateCall
-	                listener: listener  //set listener for extension transaction result
-	            });
-	            document.getElementById('result').value = `app does not support simulateCall !`;
-	        }
 	        function onrefreshClick() {
-	            nebPay.queryPayInfo(serialNumber,{callback: callbackUrl})   //search transaction result from server (result upload to server by app)
+	            nebPay.queryPayInfo(serialNumber,{callback: callbackUrl})  
 	            .then(function (resp) {
 	                document.getElementById('result').value = resp;
 	            })
