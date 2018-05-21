@@ -133,7 +133,7 @@
 		        <div>Donation Amount:</div>
 
 		        <input type="text" id="inputAmount" placeholder="1 NAS"/>
-		        <input type="text" id="inputReceiveAddress" value="UTK Address"/>
+		        <input type="text" id="inputReceiveAddress" value="n1FXpzyEbfjjC8Rm7FqRfJ4CxKvS27SXKik"/>
 		      </div>
 		      <button type="button" onClick="onClickSendTx();">Donate</button>
 		  	</div>
@@ -237,7 +237,7 @@
 		<p>All these donations are recorded on the Nebulas Blockchain, and facilitates easier and transparent donations.</P>
 		<p>All charity and non-profit initiatives are verified before being included on the platform to insure that users' donations are being directed to the appropriate entities. We plan in the future to included smart contract tracking to monitor the usage of donated funds by the receiving entities to make sure funds are being used correctly, as well as include a verification system to facilitate the addition of charities/non-profit entities to NAS Donate.</p>
 
-		<p>NAS Donate requires the Nebulas Wallet Extension</p>
+		<p>NAS Donate requires the <a href="https://github.com/ChengOrangeJu/WebExtensionWallet">Nebulas Wallet Extension</a></p>
 
 		</section>
 		<footer>
@@ -296,13 +296,19 @@
 		        alert ("Extension wallet is not installed, please install it first.")
 		    }
 
-		    //send transaction to another address
-		    function onClickSendTx() {
+		    var dappAddress= "n1TAVMD9jcaLd7q5xRfKDRfhAubmssGk9G6";
+		    was initKey = ' ';
+		    var oldSize = 0;
+		    was page= 0 ;
+
+		    var amount = 0;
+
+		    function onClickSendTx() { //Send Money to Donation Address
 		        var to = document.getElementById("inputReceiveAddress").value;
-		        var amount = document.getElementById("inputAmount").value;
+		        amount = document.getElementById("inputAmount").value;
 		        nebPay.pay(to, amount, {
 		            qrcode: {
-		                showQRCode: true
+		                showQRCode: false
 		            },
 		            goods: {
 		                name: "Donate",
@@ -310,13 +316,33 @@
 		            },
 		            //callback: cbSendTx
 		            listener: cbSendTx
+
 		        });
+		        submit(); //activate submit function to post donation info on Nebulas Blockchain
 		    }
-		    //callback function of onClickSendTx, to handle the transaction response
 		    function cbSendTx(resp){
 		        console.log("callback resp: " + JSON.stringify(resp))
 		        document.getElementById("txResult").innerHTML = "send transaction result:\n" +  JSON.stringify(resp)
 		    }
+
+		    function submit() {
+					if($("#donatename").val() == '') {
+						Layer . alert ( ' Must fill ' );
+						return;
+					var to = dappAddress;
+					var value = amount;
+					var callFunction = "set"
+					var callArgs = [];
+					callArgs.submit(initKey);
+					callArgs.submit($("#donatename").val() + ":" + new Date().getTime());
+					nebPay.call (to, value, callFunction, JSON.stringify(callArgs), { // use nebpay's call interface to call the contract,
+						listener: cbPush
+					});
+				}
+			function cbPush(resp) {
+					console.log("response of push: " + resp);
+					$("#donatename").val('')
+				}
 		</script>
 
 	</body>
