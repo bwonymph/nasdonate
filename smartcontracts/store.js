@@ -1,19 +1,20 @@
 'use strict'
 
-var Data = function (address, timestamp, amount) {
+var Content = function (address, timestamp, amount) {
     if(this.verifyAddress(address)){
         this.address = address;
         this.timestamp = timestamp;
         this.amount = amount;
-    }else {
-        let o = JSON.parse(address);
-        this.address = o.address;
-        this.timestamp = o.timestamp;
-        this.amount = o.amount;
+    }
+    else {
+        let x = JSON.parse(address);
+        this.address = x.address;
+        this.timestamp = x.timestamp;
+        this.amount = x.amount;
     }
 };
 
-Data.prototype = {
+Content.prototype = {
     toString: function () {
         return JSON.stringify(this);
     },
@@ -24,87 +25,65 @@ Data.prototype = {
 
 var DonateContract = function () {
     LocalContractStorage.defineMapProperty(this, "datas", {
+
         stringify: function (obj) {
             return obj.toString();
         },
         parse: function (str) {
-            return new Data(str)
+            return new Content(str)
         }
     });
     LocalContractStorage.defineProperties(this, {
         totaldonate: {
+            
             stringify: function (obj) {
                 return obj.toString();
             },
             parse: function (str) {
-                return new Data(str);
+                return new Content(str);
             }
         },
-        adminAddress: null
     });
 };
 
 DonateContract.prototype = {
     init: function () {
-        this.adminAddress = Blockchain.transaction.from;
-        this.totaldonate = new Data(this.adminAddress,Date.now(), 1);
-        this.setdonate(this.totaldonate.amount)
+        this.initial = Blockchain.transaction.from;
+        this.totaldonate = new Content(this.initial,Date.now(), 0);
+        this.updatedonate(this.totaldonate.amount)
     },
-    setdonate: function (amount) {
-        if(parseInt(amount) > 0){
-            let addr = Blockchain.transaction.from;
-            let currentTime = Date.now();
-            let data = new Data(addr,currentTime,amount);
-            let oldData = this.datas.get(addr);
-            let td = this.totaldonate;
-            if(oldData instanceof Data){
-                data.amount = +data.amount + +oldData.amount;
-                this.datas.put(addr,data);
-                this.totaldonate.amount = +td.amount + +data.amount;
-            }else {
-                this.datas.put(addr,data);
-            }
 
-            
-            return this.datas.get(addr);
-        }else {
-            throw new Error("no data")
-        }
-    },
-    getdonate: function () {
-        let addr = Blockchain.transaction.from;
-        let data = this.datas.get(addr);
-        if(data instanceof Data){
-            return data;
-        }else {
-            throw new Error("no data")
-        }
-    },
-    curtot: function (amount) {
+    updatedonate: function (amount) {//update donations for respective addresses disregarding to which address
         if(parseInt(amount) > 0){
-            let addr = Blockchain.transaction.from;
-            let currentTime = new Date();
-            let data = new Data(addr,currentTime,amount);
-            this.totaldonate = data;
-            return data;
-        }else {
-            throw new Error("no data")
+            let address = Blockchain.transaction.from;
+            let timestamp = Date.now(); //get current timestamp
+            let content = new Content(address,timestamp,amount);
+            let temp = this.datas.get(address);
+            let totald = this.totaldonate;
+            if(temp instanceof Content){
+                content.amount = +content.amount + +temp.amount;
+                this.datas.put(address,content);
+                this.totaldonate.amount = +totald.amount + +content.amount;
+            }
+            else { // For initial run, i.e. no data. 
+                this.datas.put(address,content);
+            }
+            return this.datas.get(address);
         }
     },
-    gettot: function () {
-        if(this.totaldonate instanceof Data){
+
+    getdonate: function () {//receive donation info for respective address
+        let address = Blockchain.transaction.from;
+        let content = this.datas.get(address);
+        if(content instanceof Content){
+            return content;
+        }
+    },
+    getTotalDonations: function () { //Donations from all addresses to any addresses
+        if(this.totaldonate instanceof Content){
             return this.totaldonate;
-        }else {
-            throw new Error("no data")
         }
-    },
-    setAdminAddress: function (address) {
-        if (Blockchain.transaction.from === this.adminAddress) {
-            this.adminAddress = address;
-        } else {
-            throw new Error("Admin only");
-        }
-    },
+    }
 };
 
 module.exports = DonateContract;
