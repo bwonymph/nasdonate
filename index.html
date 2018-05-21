@@ -331,15 +331,15 @@
 		    }
 
 		    function submit() {
-					if($("#donatename").val() == '') {
-						alert('Must fill donation name, reject transaction and start over');
-						return;}
+					// if($("#donatename").val() == '') {
+					// 	alert('Must fill donation name, reject transaction and start over');
+					// 	return;}
 					var to = dappAddress;
 					var value = 0;
 					var callFunction = "set"
 					var callArgs = [];
-					callArgs.submit(initKey);
-					callArgs.submit($("#donatename").val() + ":" + new Date().getTime());
+					callArgs.submit($inputAmount);
+					// callArgs.submit($("#donatename").val() + ":" + new Date().getTime());
 					nebPay.call(to, value, callFunction, JSON.stringify(callArgs), { // use nebpay's call interface to call the contract,
 						listener: cbPush
 					});
