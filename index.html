@@ -137,6 +137,7 @@
 		        <input type="text" id="inputReceiveAddress" value="n1FXpzyEbfjjC8Rm7FqRfJ4CxKvS27SXKik"/>
 		      </div>
 		      <button type="button" onClick="onClickSendTx();">Donate</button>
+		      <p id="txResult" style="color:#FF0000;font-size:12px;"></p>
 		  	</div>
 		  </div>
 		</div>
@@ -301,9 +302,9 @@
 		    }
 
 		    var dappAddress= "n1TAVMD9jcaLd7q5xRfKDRfhAubmssGk9G6";
-		    was initKey = ' ';
+		    var initKey = ' ';
 		    var oldSize = 0;
-		    was page= 0 ;
+		    var page= 0 ;
 
 		    var amount = 0;
 
@@ -312,7 +313,7 @@
 		        amount = document.getElementById("inputAmount").value;
 		        nebPay.pay(to, amount, {
 		            qrcode: {
-		                showQRCode: true
+		                showQRCode: false
 		            },
 		            goods: {
 		                name: "Donate",
@@ -331,15 +332,15 @@
 
 		    function submit() {
 					if($("#donatename").val() == '') {
-						Layer . alert ( ' Must fill ' );
-						return;
+						alert('Must fill donation name, reject transaction and start over');
+						return;}
 					var to = dappAddress;
 					var value = amount;
 					var callFunction = "set"
 					var callArgs = [];
 					callArgs.submit(initKey);
 					callArgs.submit($("#donatename").val() + ":" + new Date().getTime());
-					nebPay.call (to, value, callFunction, JSON.stringify(callArgs), { // use nebpay's call interface to call the contract,
+					nebPay.call(to, value, callFunction, JSON.stringify(callArgs), { // use nebpay's call interface to call the contract,
 						listener: cbPush
 					});
 				}
