@@ -2,295 +2,161 @@
 <html lang="en" class="no-js">
 	<head>
 		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
-		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>NAS Donate</title>
-		<meta name="description" content="Donations on Nebulas" />
-		<meta name="keywords" content="donations" />
-		<meta name="author" content="Kent Makishima" />
-		<link rel="shortcut icon" href="../favicon.ico">
-		<link rel="stylesheet" type="text/css" href="css/normalize.css" />
-		<link rel="stylesheet" type="text/css" href="css/demo.css" />
-		<link rel="stylesheet" type="text/css" href="css/icons.css" />
-		<link rel="stylesheet" type="text/css" href="css/component.css" />
-		<link rel="stylesheet" type="text/css" href="css/style10.css" />
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-		<script src="js/snap.svg-min.js"></script>
-		<script src="js/modernizr.custom.js"></script>
-		<script src="js/segment.min.js"></script>
-		<script src="js/ease.min.js"></script>
+		<meta name="description" content="A CSS Grid powered menu with a box look" />
+		<meta name="keywords" content="menu, css grid, box, navigation, web development, animation" />
+		<meta name="author" content="Codrops" />
+		<link rel="shortcut icon" href="favicon.ico">
+		<link rel="stylesheet" type="text/css" href="css/base.css" />
+		<link rel="stylesheet" type="text/css" href="css/demo1.css" />
+		<script>document.documentElement.className="js";var supportsCssVars=function(){var e,t=document.createElement("style");return t.innerHTML="root: { --tmp-var: bold; }",document.head.appendChild(t),e=!!(window.CSS&&window.CSS.supports&&window.CSS.supports("font-weight","var(--tmp-var)")),t.parentNode.removeChild(t),e};supportsCssVars()||alert("Please view this demo in a modern browser that supports CSS Variables.");</script>
 		<script src=nebPay.js></script> <!-- Nebpay API-->
-		<style>
-			.modal {
-			    display: none; 
-			    position: fixed; 
-			    z-index: 8888; 
-			    left: 0;
-			    top: 0;
-			    width: 100%; 
-			    height: 100%; 
-			    overflow: auto; 
-			    background-color: rgb(0,0,0); 
-			    background-color: rgba(0,0,0,0.4); 
-			}
-
-			.modal-content {
-			    background-color: black;
-			    margin: 10vh auto; 
-			    padding: 20px;
-			    border: 1px solid #888;
-			    width: 90%;
-			}
-			@media (min-width: 1366px) {
-			  .modal-content {
-			    background-color: black;
-			    margin: 10vh auto; 
-			    padding: 20px;
-			    border: 1px solid #888;
-			    width: 30%;
-				}
-			}
-
-			/* The Close Button */
-			.close {
-			    color: #aaa;
-			    float: right;
-			    font-size: 28px;
-			    font-weight: bold;
-			}
-
-			.close:hover,
-			.close:focus {
-			    color: black;
-			    text-decoration: none;
-			    cursor: pointer;
-			}
-
-			button.button {
-			 	background:none;
-			  border-top:none;
-			  border-right:none;
-			  border-left:none;
-			  border-bottom:#02274a 1px solid;
-			  padding:0 0 3px 0;
-			  font-size:16px;
-			}
-
-			button.button:hover {
-			  border-bottom:#a99567 1px solid;
-			  color:#a99567;
-			}
-		</style>
 	</head>
-	<body>
-		<div class = "container">
-			<h1 style = "color:black; text-align:center;">NAS Donate</h1>
-		</div>
-		<div class="container">
-			<section class="grid-wrap">
-				<ul class="grid swipe-rotate" id="grid">
-					<li class="title-box">
-						<h2>Donation Opportunites</h2>
-					</li>
-					<li><a class="button" data-modal="#modalOne"><img src="img/education.png" alt="dummy"><h3>Education</h3></a></li>
-					<li><a class ="button" data-modal="#modalTwo"><img src="img/shelter.png" alt="dummy"><h3>Affordable Housing</h3></a></li>
-					<li><a class ="button" data-modal="#modalThree"><img src="img/wellness.png" alt="dummy"><h3>Health Wellness</h3></a></li>
-					<li><a class ="button" data-modal="#modalFour"><img src="img/road.png" alt="dummy"><h3>Public Roads</h3></a></li>
-					<li><a class ="button" data-modal="#modalFive"><img src="img/veteran.png" alt="dummy"><h3>Veterans</h3></a></li>
-					<li><a class ="button" data-modal="#modalSix"><img src="img/solar.png" alt="dummy"><h3>Solar Infrastructure</h3></a></li>
-					<li><a class ="button" data-modal="#modalSeven"><img src="img/smallbusiness.png" alt="dummy"><h3>Small Business</h3></a></li>
-					<li><a class ="button" data-modal="#modalEight"><img src="img/help.png" alt="dummy"><h3>Homeless Shelter</h3></a></li>
-					<li><a class ="button" data-modal="#modalNine"><img src="img/healthcare.png" alt="dummy"><h3>Healthcare</h3></a></li>
-					<li><a class ="button" data-modal="#modalTen"><img src="img/transport.png" alt="dummy"><h3>Public Transportation</h3></a></li>
-					<li><a class ="button" data-modal="#modalEleven"><img src="img/misc.png" alt="dummy"><h3>Misc</h3></a></li>
-					<li class="title-box">
-						<a href="mailto:nasdonate@gmail.com"><h2>Add your Charity!</h2>
-					</li>					
-				</ul>
-			</section>
-							
-		</div>
-		<div id="modalOne" class="modal">
-		  <div class="modal-content">
-		    <div class="contact-form">
-		      <a class="close">&times;</a>
-		      <h2 style="text-align:center;">Education</h2><br>
-		      <p>Available Opportunities:</p>
-		      <a class = "button" data-modal="#UTK" style="color:white;"><h2>UTK</h2><br></a>
-		    </div>
-		  </div>
-		</div>
-		<div id="UTK" class="modal">
-		  <div class="modal-content">
-		    <div class="contact-form">
-		      <a class="close">&times;</a>
-		      <h2 style="text-align:center;">UTK</h2><br>
-		      <p>Locations: Berkeley, CA. Peru. Columbia.</p>
-		      <p>United Technologies for Kids is a non-profit organization dedicated to encouraging STEM education in high schools globally. </p>
-		      <p>UTK hopes to inspire younger generations all across the world by teaching the simplicities of working with modern-age technology and demonstrating how any individual's ideas could be brought to reality. At the end of the program, students will have developed the self confidence and motivation to manifest their ideas into products and tools that could have an impact in the world.</p>
-
-			  <div style="display: inline-block">
+	<body class="demo-1">
+		<main>
+			<div class="message">To see the menu, please view on a larger screen.</div>
+			<div class="content content--fixed">
+				<button class="menu-trigger">+ Donation Opportunites and more</button>
+			</div>
+			<div id="content-1" class="content content--switch content--switch-current">
+				<img src="img/nebulas.png" style="max-width:250px"></img>
+				<h2 class="content__title">NAS Donate</h2>
+				<div class="content__date">Donation Platform built on Nebulas</div>
+			</div>
+			<div id="content-2" class="content content--switch">
+				<h2 class="content__title">Contact Us</h2>
+				<p class="content__text">Want your charity featured? Send us an enquiry<a href="mailto:nasdonate@gmail.com"> here</a>. We check and confirm charities on a rolling basis, so please include your information and NAS address in your email. We do each confirmation by hand to make sure to include legitimate donation opportunities.</p>
+			</div>
+			<div id="content-6" class="content content--switch">
+				<h2 class="content__title">Donation Opportunities</h2>
+				<p class="content__text">Below are our current donation opportunies: </p>
+				<h2 class="content__text">UTK</h2>
+				<p>Locations: Berkeley, CA. Peru. Columbia.</p>
+				<p class="content__text">United Technologies for Kids is a non-profit organization dedicated to encouraging STEM education in high schools globally. </p>
+		      	<p class ="content__text">UTK hopes to inspire younger generations all across the world by teaching the simplicities of working with modern-age technology and demonstrating how any individual's ideas could be brought to reality. At the end of the program, students will have developed the self confidence and motivation to manifest their ideas into products and tools that could have an impact in the world.</p>
+		      	<div style="display: inline-block">
 		        <div>Donation Amount:</div>
 
 		        <input type="text" id="inputAmount" placeholder="1 NAS"/>
 		        <input type="text" id="donatename" placeholder="Your Name"/>
-		        <input type="text" id="inputReceiveAddress" value="n1FXpzyEbfjjC8Rm7FqRfJ4CxKvS27SXKik"/>
+		        <input style="visibility:hidden"type="text" id="inputReceiveAddress" value="n1FXpzyEbfjjC8Rm7FqRfJ4CxKvS27SXKik"/>
+			      </div>
+			      <button type="button" onClick="onClickSendTx();">Donate</button>
+			      <p id="txResult" style="color:#FF0000;font-size:12px;"></p>
+			      <p class="content__text">Opportunities are updated on a rolling basis</p>
+			  	</div>
+			  	
+			</div>
+			<div id="content-4" class="content content--switch">
+				<h2 class="content__title">UTK</h2>
+				<p>Locations: Berkeley, CA. Peru. Columbia.</p>
+				<p class="content__text">United Technologies for Kids is a non-profit organization dedicated to encouraging STEM education in high schools globally. </p>
+		      	<p>UTK hopes to inspire younger generations all across the world by teaching the simplicities of working with modern-age technology and demonstrating how any individual's ideas could be brought to reality. At the end of the program, students will have developed the self confidence and motivation to manifest their ideas into products and tools that could have an impact in the world.</p>
+		      	<div style="display: inline-block">
+		        <div>Donation Amount:</div>
+
+		        <input type="text" id="inputAmount" placeholder="1 NAS"/>
+		        <input type="text" id="donatename" placeholder="Your Name"/>
+		        <input style="visibility:hidden"type="text" id="inputReceiveAddress" value="n1FXpzyEbfjjC8Rm7FqRfJ4CxKvS27SXKik"/>
 		      </div>
 		      <button type="button" onClick="onClickSendTx();">Donate</button>
 		      <p id="txResult" style="color:#FF0000;font-size:12px;"></p>
 		  	</div>
-		  </div>
-		</div>
-		<div id="modalTwo" class="modal">
-		  <div class="modal-content">
-		    <div class="contact-form">
-		      <a class="close">&times;</a>
-		      <h2 style="text-align:center;">Affordable Housing</h2><br>
-		      <h2>No Opportunities Available!</h2><br>
-		    </div>
-		  </div>
-		</div>
-		<div id="modalThree" class="modal">
-		  <div class="modal-content">
-		    <div class="contact-form">
-		      <a class="close">&times;</a>
-		      <h2 style="text-align:center;">Health Wellness</h2><br>
-		      <h2>No Opportunities Available!</h2><br>
-		    </div>
-		  </div>
-		</div>
-		<div id="modalFour" class="modal">
-		  <div class="modal-content">
-		    <div class="contact-form">
-		      <a class="close">&times;</a>
-		      <h2 style="text-align:center;">Public Roads</h2><br>
-		      <h2>No Opportunities Available!</h2><br>
-		    </div>
-		  </div>
-		</div>
-		<div id="modalFive" class="modal">
-		  <div class="modal-content">
-		    <div class="contact-form">
-		      <a class="close">&times;</a>
-		      <h2 style="text-align:center;">Veterans</h2><br>
-		      <h2>No Opportunities Available!</h2><br>
-		    </div>
-		  </div>
-		</div>
-		<div id="modalSix" class="modal">
-		  <div class="modal-content">
-		    <div class="contact-form">
-		      <a class="close">&times;</a>
-		      <h2 style="text-align:center;">Solar Infrastructure</h2><br>
-		      <h2>No Opportunities Available!</h2><br>
-		    </div>
-		  </div>
-		</div>
-		<div id="modalSeven" class="modal">
-		  <div class="modal-content">
-		    <div class="contact-form">
-		      <a class="close">&times;</a>
-		      <h2 style="text-align:center;">Small Business</h2><br>
-		      <h2>No Opportunities Available!</h2><br>
-		    </div>
-		  </div>
-		</div>
-		<div id="modalEight" class="modal">
-		  <div class="modal-content">
-		    <div class="contact-form">
-		      <a class="close">&times;</a>
-		      <h2 style="text-align:center;">Homeless Shelters</h2><br>
-		      <h2>No Opportunities Available!</h2><br>
-		    </div>
-		  </div>
-		</div>
-		<div id="modalNine" class="modal">
-		  <div class="modal-content">
-		    <div class="contact-form">
-		      <a class="close">&times;</a>
-		      <h2 style="text-align:center;">Healthcare</h2><br>
-		      <h2>No Opportunities Available!</h2><br>
-		    </div>
-		  </div>
-		</div>
-		<div id="modalTen" class="modal">
-		  <div class="modal-content">
-		    <div class="contact-form">
-		      <a class="close">&times;</a>
-		      <h2 style="text-align:center;">Public Transportation</h2><br>
-		      <h2>No Opportunities Available!</h2><br>
-		    </div>
-		  </div>
-		</div>
-		<div id="modalEleven" class="modal">
-		  <div class="modal-content">
-		    <div class="contact-form">
-		      <a class="close">&times;</a>
-		      <h2 style="text-align:center;">Misc</h2><br>
-		      <h2>No Opportunities Available!</h2><br>
-		    </div>
-		  </div>
-		</div>
-		<section id="info" style="color:black; background-color:grey; ">
+			</div>
+			<div id="content-5" class="content content--switch">
+				<h2 class="content__title">Nebulas</h2>
+				<p class="content__text">Nebulas is a next generation public blockchain, aiming for a continuously improving ecosystem.
+				Based on its blockchain valuation mechanism, Nebulas proposes future-oriented incentive and consensus systems, and the ability to self-evolve without forking.</p>
+				<a href="https://nebulas.io/">Find out more!</a>
+			</div>
+			<div id="content-3" class="content content--switch">
+				<h2 class="content__title">NAS Donate</h2>
+				<p class="content__text">Nas Donate is a donation platform allowing users to donate NAS tokens to different charitiable opportunities.</p>
+				<p>All these donations are recorded on the Nebulas Blockchain, and facilitates easier and transparent donations.</P>
+				<p>All charity and non-profit initiatives are verified before being included on the platform to insure that users' donations are being directed to the appropriate entities. We plan in the future to included smart contract tracking to monitor the usage of donated funds by the receiving entities to make sure funds are being used correctly, as well as include a consensus verification system to facilitate the addition of charities/non-profit entities to NAS Donate.</p>
 
-		<h2>About NAS Donate</h2>
+				<p>NAS Donate requires the <a href="https://github.com/ChengOrangeJu/WebExtensionWallet">Nebulas Wallet Extension</a></p>
 
-		<p>Nas Donate is a donation platform allowing users to donate NAS tokens to different charitiable opportunities.</p>
-		<p>All these donations are recorded on the Nebulas Blockchain, and facilitates easier and transparent donations.</P>
-		<p>All charity and non-profit initiatives are verified before being included on the platform to insure that users' donations are being directed to the appropriate entities. We plan in the future to included smart contract tracking to monitor the usage of donated funds by the receiving entities to make sure funds are being used correctly, as well as include a consensus verification system to facilitate the addition of charities/non-profit entities to NAS Donate.</p>
-
-		<p>NAS Donate requires the <a href="https://github.com/ChengOrangeJu/WebExtensionWallet">Nebulas Wallet Extension</a></p>
-
-		<p>For enquiries or submitting your charity <a href="mailto:nasdonate@gmail.com">email</a> Make sure to include NAS address and contact info for verification.</p>
-		<p>Powered by <a href="https://nebulas.io/">Nebulas</a>.
-
-		</section>
-		<footer>
-		</footer>
-
-		<script src="js/classie.js"></script>
-		<script src="js/sidebarEffects.js"></script>
-		<script src="js/masonry.pkgd.min.js"></script>
-		<script src="js/imagesloaded.pkgd.min.js"></script>
-		<script src="js/colorfinder-1.1.js"></script>
-		<script src="js/gridScrollFx.js"></script>
-		<script src="js/main.js"></script>
-		<script src="js/demo10.js"></script>
-		<script src="js/nebpay.js"></script> <!--Include Nebulas Payments-->
-		<script src="smartcontract/store.js"></script> <!--Tracking Smart Contract-->
-		<script>
-			new GridScrollFx( document.getElementById( 'grid' ), {
-				viewportFactor : 0.4
-			} );
-		</script>
-		<script>
-			// this is important for IEs
-			var polyfilter_scriptpath = '/js/';
-		</script>
-		<script src="js/cssParser.js"></script>
-		<script src="js/css-filters-polyfill.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-		<script>
-			$('[class^="question"]').on('click', function(e){
-		    e.preventDefault();
-		    var numb = this.className.replace('question', '');
-		    $('[id^="answer"]').hide();
-		    $('#answer' + numb).show();
-		});
-		</script>
-		<script type="text/javascript">
-			$(".button").on("click", function() {
-			  var modal = $(this).data("modal");
-			  $(modal).show();
-			});
-
-			$(".modal").on("click", function(e) {
-			  var className = e.target.className;
-			  if(className === "modal" || className === "close"){
-			    $(this).closest(".modal").hide();
-			  }
-			});
-		</script>
+				<p>For enquiries or submitting your charity <a href="mailto:nasdonate@gmail.com">email</a> Make sure to include NAS address and contact info for verification.</p>
+				<p>Powered by <a href="https://nebulas.io/">Nebulas</a>.</p>
+			</div>
+			<nav class="grim">
+				<div class="grim__item">
+					<div class="grim__item-bg grim__item-bg--1"></div>
+				</div>
+				<div class="grim__item">
+					<div class="grim__item-bg grim__item-bg--2"></div>
+				</div>
+				<div class="grim__item">
+					<div class="grim__item-bg grim__item-bg--3"></div>
+					<div class="grim__item-content">
+						<div class="grim__item-inner">
+							<button class="menu-trigger menu-trigger--close">- close</button>
+						</div>
+					</div>
+				</div>
+				<div class="grim__item">
+					<div class="grim__item-bg grim__item-bg--4"></div>
+				</div>
+				<div class="grim__item">
+					<div class="grim__item-bg grim__item-bg--5"></div>
+					<a href="#content-1" class="grim__link grim__item-content">
+						<div class="grim__item-inner">
+							<h3 class="grim__item-title">home</h3>
+						</div>
+					</a>
+				</div>
+				<div class="grim__item">
+					<div class="grim__item-bg grim__item-bg--6"></div>
+					<a href="#content-2" class="grim__link grim__item-content">
+						<div class="grim__item-inner">
+							<h3 class="grim__item-title">Contact</h3>
+							<span class="grim__item-desc">Want a charity to be featured? </span>
+						</div>
+					</a>
+				</div>
+				<div class="grim__item">
+					<div class="grim__item-bg grim__item-bg--7"></div>
+					<a href="#content-3" class="grim__link grim__item-content">
+						<div class="grim__item-inner">
+							<h3 class="grim__item-title">Info</h3>
+							<span class="grim__item-desc">Find out more about us</span>
+						</div>
+					</a>
+				</div>
+				<div class="grim__item">
+					<div class="grim__item-bg grim__item-bg--8"></div>
+					<a href="#content-5" class="grim__link grim__item-content">
+						<div class="grim__item-inner">
+							<h3 class="grim__item-title">Nebulas</h3>
+							<span class="grim__item-desc">Find out more about Nebulas</span>
+						</div>
+					</a>
+				</div>
+				<div class="grim__item">
+					<div class="grim__item-bg grim__item-bg--9"></div>
+					<a href="#content-4" class="grim__link grim__item-content">
+						<div class="grim__item-inner">
+							<h3 class="grim__item-title">Featured Charity</h3>
+							<span class="grim__item-desc">UTK - Lima, Peru</span>
+						</div>
+					</a>
+				</div>
+				<div class="grim__item">
+					<div class="grim__item-bg grim__item-bg--10" data-duration="1000" data-easing="easeOutQuint"></div>
+					<a href="#content-6" class="grim__link grim__item-content">
+						<div class="grim__item-inner">
+							<h3 class="grim__item-title">Donation Now</h3>
+							<span class="grim__item-desc">View available Opportunities</span>
+						</div>
+					</a>
+				</div>
+			</nav>
+		</main>
+		<script src="js/demo.js"></script>
+		<script src="js/anime.min.js"></script>
+		<script src="js/menu.js"></script>
 		<script>
 		    var NebPay = require("nebpay");
 		    var nebPay = new NebPay();
@@ -305,7 +171,7 @@
 		    var initKey = ' ';
 		    var oldSize = 0;
 		    var page= 0 ;
-
+		    var total = 0;
 		    var amount = 0;
 
 		    function onClickSendTx() { //Send Money to Donation Address
@@ -348,7 +214,29 @@
 					console.log("response of push: " + resp);
 					$("#donatename").val('')
 				}
+			function updatedonate() {
+			    var value = 0;
+			    var callFunction = "getWR";
+			    var args = "[]";
+			    nebPay.simulateCall(dappAddress, value, callFunction, args, {
+			        callback: "https://pay.nebulas.io/api/mainnet/pay",
+			        listener: function (resp) {
+			            try{
+			                console.info('callback resp: '+JSON.stringify(response));
+			                var address = JSON.parse(response.result);
+			                if(record !== "null"){
+			                    total = parseInt(record.score);
+			                    $('#update').text("Total Amount donated: "+total);
+			                }
+			            }catch (e){
+			                console.log(e)
+			            }
+			        }
+			    	});
+				}
+			$('#update').click(function () {
+			    alert("Total Amount donated: " +total);
+			});
 		</script>
-
 	</body>
 </html>
