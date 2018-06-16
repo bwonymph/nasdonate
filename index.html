@@ -161,6 +161,7 @@
 		<script>
 		    var NebPay = require("nebpay");
 		    var nebPay = new NebPay();
+		    var serialNumber;
 
 		    //to check if the extension is installed
 		    //if the extension is installed, var "webExtensionWallet" will be injected in to web page
@@ -197,19 +198,18 @@
 	            var value = document.getElementById("inputAmount").value;
 	            serialNumber = nebPay.pay(to, value, {
 	                qrcode: {
-	                    showQRCode: true
+	                    showQRCode: false
 	                },
 	                goods: {
 	                    name: "Donate",
 	                    desc: "Donate goods"
 	                },
 	                listener: cbSendTx,  //set listener for extension transaction result
-	                debug: enableDebug
 	            });
 	            setTimeout(() => {
 	                onrefreshClick();   //search transaction result from server (result upload to server by app)
 	            }, 1000);
-	            submit();
+	            // submit();
         	}
 
 		    function cbSendTx(resp){
