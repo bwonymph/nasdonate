@@ -194,7 +194,7 @@
 		    }
 		    function onPayClick() {
 	            var to = document.getElementById("inputReceiveAddress").value;
-	            var value = document.getElementById("value").value;
+	            var value = document.getElementById("inputAmount").value;
 	            serialNumber = nebPay.pay(to, value, {
 	                qrcode: {
 	                    showQRCode: true
